@@ -8,7 +8,7 @@ RUN apk --no-cache add openssl \
 RUN rm -r $CATALINA_HOME/webapps/ROOT \
     && rm -r $CATALINA_HOME/webapps/docs \
     && rm -r $CATALINA_HOME/webapps/examples \
-    && mkdir $CATALINA_HOME/webapps/molgenis \f
+    && mkdir $CATALINA_HOME/webapps/molgenis \
     && mv molgenis-app-rd-connect-3.0.0.war $CATALINA_HOME/webapps/molgenis/ROOT.war \
 	&& echo 'CATALINA_OPTS="-Xmx2g -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -Dmolgenis.home=/opt/molgenis/"' > $CATALINA_HOME/bin/setenv.sh
 
