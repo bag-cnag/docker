@@ -7,9 +7,9 @@ ARG MOLGENIS_VERSION
 RUN apk --no-cache add openssl python3 \
 	&& wget -O molgenis-app-rd-connect-$MOLGENIS_VERSION.war https://github.com/molgenis/molgenis-rd-connect/releases/download/v$MOLGENIS_VERSION/molgenis-app-rd-connect-$MOLGENIS_VERSION.war
 
-RUN rm -r $CATALINA_HOME/webapps/ROOT \
-    && rm -r $CATALINA_HOME/webapps/docs \
-    && rm -r $CATALINA_HOME/webapps/examples \
+RUN mv  $CATALINA_HOME/webapps/ROOT $CATALINA_HOME/webapps/ROOT_old  \
+   # && rm -r $CATALINA_HOME/webapps/docs \
+   # && rm -r $CATALINA_HOME/webapps/examples \
     && mv molgenis-app-rd-connect-$MOLGENIS_VERSION.war $CATALINA_HOME/webapps/ROOT.war \
 	&& echo 'CATALINA_OPTS="-Xmx2g -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -Dmolgenis.home=/opt/molgenis/ -Dopencpu.uri.port=8004"' > $CATALINA_HOME/bin/setenv.sh
 
